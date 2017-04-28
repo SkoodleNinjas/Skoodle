@@ -1,8 +1,8 @@
 language: java
 
-#script:
-#  - gradle check 
-#  - gradle assemble
+script:
+  - gradle check 
+  - gradle assemble
 
 jdk:
   - oraclejdk8
