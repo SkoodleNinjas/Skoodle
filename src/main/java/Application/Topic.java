@@ -10,16 +10,26 @@ import java.awt.Image;
 public class Topic {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String topic;
     private String category;
     @Lob
     private byte[] image;
 
-    public Topic(String topic, byte[] image) {
-        this.topic = topic;
-        this.image = image;
+    public Topic() {
+        generateCategory();
+        generateTopic();
+        generateImage();
+    }
+
+    private void generateCategory() {
+    }
+
+    private void generateTopic() {
+    }
+
+    private void generateImage() {
     }
 
     public Long getId() {
@@ -36,17 +46,5 @@ public class Topic {
 
     public String getCategory() {
         return category;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 }

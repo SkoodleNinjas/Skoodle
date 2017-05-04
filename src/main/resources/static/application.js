@@ -43,35 +43,57 @@ function sendName() {
 }
 
 function createBadge(players, maxPlayers) {
-	var colors = ["cyan", "orange", "red"];
-	var color = colors[0];
-	var step = maxPlayers / 3;
-	if (players != 0) {
-		color = colors[Math.round(players / step) - 1];
-	}
-	
-	var result = '<span class="new badge ' + color + '" data-badge-caption="/' + maxPlayers + 
-		'">' + players + '</span>'
+	if (players == null) {
+	    players = 0;
+    }
+
+	var result = players + " of " + maxPlayers + " players";
 	return result;
+}
+
+function getColor(players, maxPlayers) {
+    var colors = ["cyan", "orange", "red"];
+    var color = colors[0];
+    var step = maxPlayers / 3;
+    if (players != 0 && players != null) {
+        color = colors[Math.round(players / step) - 1];
+    }
+    return color
 }
 
 
 function createTableRow(room) {
-	var result = "<tr>";
+    var result = "";
 
-	result += "<td>";
-	result += room.id;
-	result += "</td>";
-	
-	result += "<td>";
-	result += createBadge(room.players, room.maxPlayers);
-	result += "</td>";
-	
-	result += "<td>";
-	result += room.maxPlayers; 
-	result += "</td>";
-	
-	result += "</tr>";
+    result += "<li class=\"collection-item avatar\">"
+    result += "<i class=\"material-icons circle " + getColor(room.players, room.maxPlayers) + " \">lock_open</i>";
+    result += "<span class=\"title\">";
+    result += room.name;
+    result += "</span>";
+    result += "<p>";
+    result += result += createBadge(room.players, room.maxPlayers);
+    result += "<br>";
+    result += room.numberOfRounds;
+    result += " Rounds";
+    result += "</p>";
+    result += "<a href=\"#!\" class=\"secondary-content\"><i class=\"material-icons\">send</i></a>";
+    result += "</li>";
+
+	// var result = "<tr>";
+    //
+	// result += "<td>";
+	// result += room.id;
+	// result += "</td>";
+    //
+	// result += "<td>";
+	// result += createBadge(room.players, room.maxPlayers);
+	// result += "</td>";
+    //
+	// result += "<td>";
+	// result += room.maxPlayers;
+	// result += "</td>";
+    //
+	// result += "</tr>";
 	return result;
 }
 

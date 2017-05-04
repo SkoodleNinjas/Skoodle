@@ -17,17 +17,17 @@ Ivan Milev
 	<meta name="author" content="Aleksandar Stoyanov">
 	<meta name="author" content="Dari Nikitova">
 	<meta name="author" content="Ivan Milev">
-	<meta name="author" content="Nikolat Stanishev">
+	<meta name="author" content="Nikolay Stanishev">
 	<meta name="author" content="Tihomir Mateev">
-	
+
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/main.css" rel="stylesheet">
-    
+
 	<script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/application.js"></script>
-	
+
 	<!-- MaterilzeCss icons -->
   	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
@@ -58,28 +58,30 @@ Ivan Milev
 <!--Main Container-->
 	<div id="main-content" class="container">
 <!--	Content -->
-		<table id="conversation" class="table table-striped striped">
-			<thead>
-			<tr>
-				<th colspan="4"><center><h4>Rooms</h4></center></th>
-			</tr>
-			<tr class="card-panel cyan lighten-3">
-				<th class="filter-room">
-					Room id
-				</th>
-				<th class="filter-players">
-					Players
-				</th>
-				<th class="filter-rounds">
-					Rounds
-				</th>
-			</tr>
-			</thead>
+		<ul id="greetings" class="collection">
+		</ul>
+		<!--<table id="conversation" class="table table-striped striped">-->
+			<!--<thead>-->
+			<!--<tr>-->
+				<!--<th colspan="4"><center><h4>Rooms</h4></center></th>-->
+			<!--</tr>-->
+			<!--<tr class="card-panel cyan lighten-3">-->
+				<!--<th class="filter-room">-->
+					<!--Room id-->
+				<!--</th>-->
+				<!--<th class="filter-players">-->
+					<!--Players-->
+				<!--</th>-->
+				<!--<th class="filter-rounds">-->
+					<!--Rounds-->
+				<!--</th>-->
+			<!--</tr>-->
+			<!--</thead>-->
 
-			<tbody id="greetings">
-			</tbody>
+			<!--<tbody id="greetings">-->
+			<!--</tbody>-->
 
-		</table>
+		<!--</table>-->
 
 
 <!--	Adding Room form-->
