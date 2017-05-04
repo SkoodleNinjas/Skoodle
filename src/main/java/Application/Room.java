@@ -28,9 +28,11 @@ public class Room {
     }
 
     private void generateName() {
+        name = "Qkata rabota";
     }
 
     private void generateNumberOfRounds() {
+        numberOfRounds = 5;
     }
 
     public long getId() {
