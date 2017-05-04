@@ -17,13 +17,17 @@ import java.util.List;
 public class LobbyController {
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private TopicService topicService;
 
     @RequestMapping(value = "/rest/rooms", method = RequestMethod.POST)
     @MessageMapping("/add-room")
     @SendTo("/rest/add-room")
     public Room createAndGiveRoom(CreateRoom roomParams) throws  Exception{
+        topicService.saveTopic(new Topic());
         Room r = new Room();
         r.setMaxPlayers(roomParams.getMaxPlayers());
+        r.setTopic(topicService.findRandom());
         roomService.saveRoom(r);
         return r;
     }
