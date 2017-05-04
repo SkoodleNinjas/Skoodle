@@ -55,7 +55,7 @@ function getColor(players, maxPlayers) {
     var colors = ["cyan", "orange", "red"];
     var color = colors[0];
     var step = maxPlayers / 3;
-    if (players != 0) {
+    if (players != 0 && players != null) {
         color = colors[Math.round(players / step) - 1];
     }
     return color
@@ -66,9 +66,7 @@ function createTableRow(room) {
     var result = "";
 
     result += "<li class=\"collection-item avatar\">"
-    result += "<i class=\"material-icons circle ";
-    result += getColor(room.players, room.maxPlayers);
-    result += " \">lock_open</i>";
+    result += "<i class=\"material-icons circle " + getColor(room.players, room.maxPlayers) + " \">lock_open</i>";
     result += "<span class=\"title\">";
     result += room.name;
     result += "</span>";
