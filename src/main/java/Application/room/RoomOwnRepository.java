@@ -1,5 +1,6 @@
-package Application;
+package Application.room;
 
+import Application.room.topic.Topic;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

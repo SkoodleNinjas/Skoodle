@@ -1,4 +1,6 @@
-package Application;
+package Application.room;
+
+import Application.Application;
 
 /**
  * In Future we should use directly the Room Class :thinking:

@@ -1,4 +1,4 @@
-package Application;
+package Application.room.topic;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
