@@ -1,8 +1,10 @@
-package Application;
+package Application.room;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import Application.room.name.RoomName;
+import Application.room.topic.Topic;
 
 import javax.persistence.*;
+import java.util.Random;
 
 /**
  * Created by ivan on 12.4.2017 г..
@@ -17,22 +19,20 @@ public class Room {
     @OneToOne
     @PrimaryKeyJoinColumn
     private Topic topic;
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private RoomName name;
     private long maxPlayers;
     private long[] playerIds;
-    private String name;
     private long numberOfRounds;
 
     public Room() {
-        generateName();
         generateNumberOfRounds();
     }
 
-    private void generateName() {
-        name = "Qkata rabota";
-    }
-
     private void generateNumberOfRounds() {
-        numberOfRounds = 5;
+        Random random = new Random();
+        numberOfRounds = random.nextInt((7 - 3 + 1)) + 3;
     }
 
     public long getId() {
@@ -60,10 +60,10 @@ public class Room {
     }
 
     public String getName() {
-        return name;
+        return name.getRoomName();
     }
 
-    public void setName(String name) {
+    public void setName(RoomName name) {
         this.name = name;
     }
 
