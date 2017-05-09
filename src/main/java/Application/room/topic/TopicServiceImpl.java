@@ -29,7 +29,7 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public Topic findRandom() {
         Random random = new Random();
-        return topicRepository.findOne((long) (random.nextInt((int) ((topicRepository.count() - 1) - 0 + 1)) + 0));
+        return topicRepository.findOne(((long) (random.nextInt((int) (topicRepository.count()))) + 1));
     }
 
     @Override

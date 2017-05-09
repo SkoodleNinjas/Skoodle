@@ -31,26 +31,13 @@ public class LobbyController {
     @MessageMapping("/add-room")
     @SendTo("/rest/add-room")
     public Room createAndGiveRoom(CreateRoom roomParams) throws  Exception{
-        byte[] image = new byte[0];
-        Topic t = new Topic();
-        t.setTopic("Cat");
-        t.setCategory("Animal");
-        t.setImage(image);
-        Topic t1 = new Topic();
-        t.setTopic("Dog");
-        t.setCategory("Animal");
-        t.setImage(image);
-        topicService.saveTopic(t);
-        topicService.saveTopic(t1);
-        RoomName rn = new RoomName();
-        rn.setRoomName("Qkata staq");
-        RoomName rn1 = new RoomName();
-        rn.setRoomName("Ne6to");
-        RoomName rn2 = new RoomName();
-        rn.setRoomName("TUES");
-        roomNameService.saveRoomName(rn);
-        roomNameService.saveRoomName(rn1);
-        roomNameService.saveRoomName(rn2);
+        if (topicService.findAll().size() == 0) {
+            fillDataBaseWithTopics();
+        }
+        if (roomNameService.findAll().size() == 0) {
+            fillDataBaseWithRoomNames();
+        }
+
         Room r = new Room();
         r.setMaxPlayers(roomParams.getMaxPlayers());
         r.setName(roomNameService.findRandom());
@@ -63,6 +50,32 @@ public class LobbyController {
     @RequestMapping("/lobby")
     public List<Room> getRooms() throws  Exception{
         return roomService.findAll();
+    }
+
+    private void fillDataBaseWithTopics() {
+        byte[] image = new byte[0];
+        Topic t = new Topic();
+        t.setTopic("Cat");
+        t.setCategory("Animal");
+        t.setImage(image);
+        topicService.saveTopic(t);
+        Topic t1 = new Topic();
+        t1.setTopic("Dog");
+        t1.setCategory("Animal");
+        t1.setImage(image);
+        topicService.saveTopic(t1);
+    }
+
+    private void fillDataBaseWithRoomNames() {
+        RoomName rn = new RoomName();
+        rn.setRoomName("Qkata staq");
+        roomNameService.saveRoomName(rn);
+        RoomName rn1 = new RoomName();
+        rn1.setRoomName("Ne6to");
+        roomNameService.saveRoomName(rn1);
+        RoomName rn2 = new RoomName();
+        rn2.setRoomName("TUES");
+        roomNameService.saveRoomName(rn2);
     }
 
 }
