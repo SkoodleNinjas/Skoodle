@@ -29,7 +29,7 @@ public class RoomNameServiceImpl implements RoomNameService {
     @Override
     public RoomName findRandom() {
         Random random = new Random();
-        return roomNameRepository.findOne((long) (random.nextInt((int) ((roomNameRepository.count() - 1) - 0 + 1)) + 0));
+        return roomNameRepository.findOne(((long) (random.nextInt((int) (roomNameRepository.count()))) + 1));
     }
 
     @Override
