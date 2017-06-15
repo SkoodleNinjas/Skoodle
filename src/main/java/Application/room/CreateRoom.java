@@ -1,7 +1,5 @@
 package Application.room;
 
-import Application.Application;
-
 /**
  * In Future we should use directly the Room Class :thinking:
  * Created by ivan on 14.4.2017 г..

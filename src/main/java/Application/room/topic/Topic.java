@@ -1,9 +1,10 @@
 package Application.room.topic;
 
-import Application.Application;
-
-import javax.persistence.*;
-import java.awt.Image;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  * Created by nikolay on 4/26/17.
