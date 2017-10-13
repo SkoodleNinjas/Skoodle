@@ -1,0 +1,33 @@
+C#
+Its Kinematic == no gravity
+using UnityEngine;
+using System.Collections;
+
+public class Helper : MonoBehaviour
+{
+    Vector3 newPos;
+    float speed;
+    GameObject collider_player;
+    public void move_cam(Collision2D collider, float offset, float speed)
+    {
+        if(collider.gameObject.tag == "brick")
+        {
+            collider_player = collider.gameObject;
+            newPos = new Vector3(Camera.main.transform.position.x,
+                    collider.gameObject.transform.position.y + offset,
+                    Camera.main.transform.postion.z);
+            StartCoroutine("moveCam_coroutine");
+        }
+    }
+    IEnumerator moveCam_coroutine()
+    {
+        while (Camera.main.transform.postion != newPos)
+        {
+            if(newPos.y >= Camera.main.transform.position.y)
+            {
+                Camera.main.transform.postion = Vector3.MoveTowards(Camera.main.transform.position, newPos, speed*Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+}
