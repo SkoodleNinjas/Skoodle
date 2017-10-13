@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Skoodle.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -13,18 +14,14 @@ namespace Skoodle.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public PartialViewResult SPATestMethod()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return PartialView();
         }
 
-        public ActionResult Contact()
+        public PartialViewResult IndexPartial()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return PartialView("Index");
         }
     }
 }
