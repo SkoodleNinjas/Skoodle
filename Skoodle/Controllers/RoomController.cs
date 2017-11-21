@@ -17,7 +17,22 @@ namespace Skoodle.Controllers
         // GET: Room
         public ActionResult Index()
         {
-            return View(db.Rooms.ToList());
+            return PartialView(db.Rooms.ToList());
+        }
+
+        public ActionResult Join(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Room room = db.Rooms.Find(id);
+            if (room == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("Room", room);
         }
 
         // GET: Room/Details/5
@@ -32,13 +47,13 @@ namespace Skoodle.Controllers
             {
                 return HttpNotFound();
             }
-            return View(room);
+            return PartialView(room);
         }
 
         // GET: Room/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Room/Create
@@ -55,7 +70,7 @@ namespace Skoodle.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(room);
+            return PartialView(room);
         }
 
         // GET: Room/Edit/5
@@ -86,7 +101,7 @@ namespace Skoodle.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(room);
+            return PartialView(room);
         }
 
         // GET: Room/Delete/5
@@ -101,7 +116,7 @@ namespace Skoodle.Controllers
             {
                 return HttpNotFound();
             }
-            return View(room);
+            return PartialView(room);
         }
 
         // POST: Room/Delete/5
