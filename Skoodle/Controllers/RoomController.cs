@@ -17,7 +17,7 @@ namespace Skoodle.Controllers
         // GET: Room
         public ActionResult Index()
         {
-            return PartialView(db.Rooms.ToList());
+            return PartialView(db.Topics.ToList());
         }
 
         public ActionResult Join(int? id)

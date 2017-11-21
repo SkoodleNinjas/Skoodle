@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Skoodle.App_Start;
 
 namespace Skoodle.Models
 {
@@ -27,9 +28,11 @@ namespace Skoodle.Models
 
         public static ApplicationDbContext Create()
         {
+            Database.SetInitializer<ApplicationDbContext>(new CustomInitializer());
             return new ApplicationDbContext();
         }
 
         public System.Data.Entity.DbSet<Skoodle.Models.Room> Rooms { get; set; }
+        public System.Data.Entity.DbSet<Skoodle.Models.Topic> Topics { get; set; }
     }
 }
