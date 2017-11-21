@@ -29,5 +29,7 @@ namespace Skoodle.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Skoodle.Models.Room> Rooms { get; set; }
     }
 }

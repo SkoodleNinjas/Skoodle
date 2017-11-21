@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
+
+namespace Skoodle.Models
+{
+    public class Room
+    {
+        [Key]
+        public int RoomId { get; set; }
+        public string RoomName { get; set; }
+        public virtual ICollection<Topic> Topic { get; set; }
+        public int MaxPlayers { get; set; }
+        public int MaxRounds { get; set; }
+        //public virtual ICollection<ApplicationIdentity> Users { get; set; }
+    }
+}

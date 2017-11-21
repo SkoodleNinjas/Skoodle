@@ -1,0 +1,42 @@
+﻿@model Skoodle.Models.Room
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RoomName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoomName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxPlayers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxPlayers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxRounds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxRounds)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RoomId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
