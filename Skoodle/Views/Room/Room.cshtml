@@ -1,6 +1,20 @@
-﻿@model Skoodle.Models.Room
+﻿@model Skoodle.ViewModels.RoomViewModel
 
 <div>
-    <h1>@Model.RoomName</h1>
-    <canvas></canvas>
+    <h1 class="text-center">@Model.Name</h1>
+    <div class="col-sm-3">
+        <h2>Chat:</h2>
+    </div>
+    
+    <div class="col-sm-6">
+        <h2>"Some TOPIC?!"</h2>
+        <canvas></canvas>
+    </div>
+    <div class="col-sm-3">
+        @foreach (var username in Model.CurrentUserNames)
+        {
+            <p> <span class="glyphicon glyphicon-user"></span> @username</p>
+        }
+    </div>
+    @Html.ActionLink("Leave room", "LeaveRoom", "Room", new { roomId = Model.RoomId }, new { @class = "btn btn-info" })
 </div>

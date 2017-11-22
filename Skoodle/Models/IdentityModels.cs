@@ -28,7 +28,7 @@ namespace Skoodle.Models
 
         public static ApplicationDbContext Create()
         {
-            Database.SetInitializer<ApplicationDbContext>(new CustomInitializer());
+            // Database.SetInitializer<ApplicationDbContext>(new CustomInitializer());
             return new ApplicationDbContext();
         }
 

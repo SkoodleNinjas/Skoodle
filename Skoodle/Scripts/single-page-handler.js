@@ -1,5 +1,4 @@
 ﻿$("#content-container").on("click", "a", function (event) {
-    console.log("asdas")
     loadBody(event);
 });
 

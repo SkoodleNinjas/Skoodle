@@ -13,15 +13,5 @@ namespace Skoodle.Controllers
         {
             return View();
         }
-
-        public PartialViewResult SPATestMethod()
-        {
-            return PartialView();
-        }
-
-        public PartialViewResult IndexPartial()
-        {
-            return PartialView("Index");
-        }
     }
 }

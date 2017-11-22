@@ -15,6 +15,6 @@ namespace Skoodle.Models
         public virtual ICollection<Topic> Topic { get; set; }
         public int MaxPlayers { get; set; }
         public int MaxRounds { get; set; }
-        //public virtual ICollection<ApplicationIdentity> Users { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

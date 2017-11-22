@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201711211822272_Room.Designer.cs">
       <DependentUpon>201711211822272_Room.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711222011143_RoomsUsersRelationAdded.cs" />
+    <Compile Include="Migrations\201711222011143_RoomsUsersRelationAdded.Designer.cs">
+      <DependentUpon>201711222011143_RoomsUsersRelationAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -223,6 +227,7 @@
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\RoomViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -280,7 +285,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\SPATestMethod.cshtml" />
     <Content Include="Views\Room\Create.cshtml" />
     <Content Include="Views\Room\Delete.cshtml" />
     <Content Include="Views\Room\Details.cshtml" />
@@ -310,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711211822272_Room.resx">
       <DependentUpon>201711211822272_Room.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711222011143_RoomsUsersRelationAdded.resx">
+      <DependentUpon>201711222011143_RoomsUsersRelationAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

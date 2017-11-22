@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Skoodle.Models;
+using Skoodle.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Skoodle.Controllers
 {
@@ -17,7 +19,7 @@ namespace Skoodle.Controllers
         // GET: Room
         public ActionResult Index()
         {
-            return PartialView(db.Topics.ToList());
+            return PartialView("Index", db.Rooms.ToList());
         }
 
         public ActionResult Join(int? id)
@@ -32,7 +34,37 @@ namespace Skoodle.Controllers
                 return HttpNotFound();
             }
 
-            return PartialView("Room", room);
+            var loggedUserId = User.Identity.GetUserId();
+            ApplicationUser loggedUser = db.Users.FirstOrDefault(x => x.Id == loggedUserId);
+            room.Users.Add(loggedUser);
+            db.SaveChanges();
+
+            var userNamesInRoom = new List<string>();
+            
+            foreach(var user in room.Users)
+            {
+                userNamesInRoom.Add(user.UserName);
+            }
+
+            var roomViewModel = new RoomViewModel
+            {
+                RoomId = room.RoomId,
+                Name = room.RoomName,
+                CurrentUserNames = userNamesInRoom
+            };
+
+            return PartialView("Room", roomViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult LeaveRoom(int? roomId)
+        {
+            var loggedUserId = User.Identity.GetUserId();
+            ApplicationUser loggedUser = db.Users.FirstOrDefault(x => x.Id == loggedUserId);
+            Room room = db.Rooms.Find(roomId);
+
+            room.Users.Remove(loggedUser);
+            return Index();
         }
 
         // GET: Room/Details/5
