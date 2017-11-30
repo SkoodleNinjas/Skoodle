@@ -9,7 +9,11 @@ namespace Skoodle
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/lib/jquery-{version}.js"));
+                        "~/Scripts/lib/jquery-{version}.js",
+                        "~/Scripts/lib/jquery.ui.core.1.10.3.min.js",
+                        "~/Scripts/lib/jquery.ui.widget.1.10.3.min.js",
+                        "~/Scripts/lib/jquery.ui.mouse.1.10.3.min.js",
+                        "~/Scripts/lib/jquery.ui.draggable.1.10.3.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/lib/jquery.validate*"));
@@ -29,6 +33,20 @@ namespace Skoodle
 
             bundles.Add(new ScriptBundle("~/bundles/spa-handler").Include(
                       "~/Scripts/single-page-handler.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/wPaint").Include(
+                "~/Scripts/lib/wColorPicker.min.js",
+                "~/Scripts/lib/wPaint-utils.js",
+                "~/Scripts/lib/wPaint.js",
+                "~/Scripts/lib/wPaint.menu.main.min.js",
+                "~/Scripts/lib/wPaint.menu.text.min.js",
+                "~/Sctipts/lib/wPaint.menu.main.shapes.min.js",
+                "~/Scripts/lib/wPaint.menu.main.file.min.js",
+                "~/Scripts/gameplay.js"));
+
+            bundles.Add(new StyleBundle("~/Content/wPaintStyles").Include(
+                "~/Content/wColorPicker.min.css",
+                "~/Content/wPaint.min.css"));
         }
     }
 }

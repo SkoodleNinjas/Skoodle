@@ -8,7 +8,8 @@
     
     <div class="col-sm-6">
         <h2>"Some TOPIC?!"</h2>
-        <canvas></canvas>
+        <div id="wPaint" style="position:relative; width:100%; height:300px; background-color:#ffffff;">
+        </div>
     </div>
     <div class="col-sm-3">
         @foreach (var username in Model.CurrentUserNames)
@@ -18,3 +19,4 @@
     </div>
     @Html.ActionLink("Leave room", "LeaveRoom", "Room", new { roomId = Model.RoomId }, new { @class = "btn btn-info" })
 </div>
+@Scripts.Render("~/bundles/wPaint")

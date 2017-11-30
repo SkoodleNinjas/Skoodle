@@ -232,6 +232,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\wColorPicker.min.css" />
+    <Content Include="Content\wPaint.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -242,9 +244,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\gameplay.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.min.js" />
     <None Include="Scripts\lib\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\lib\jquery.ui.core.1.10.3.min.js" />
+    <Content Include="Scripts\lib\jquery.ui.draggable.1.10.3.min.js" />
+    <Content Include="Scripts\lib\jquery.ui.mouse.1.10.3.min.js" />
+    <Content Include="Scripts\lib\jquery.ui.widget.1.10.3.min.js" />
     <Content Include="Scripts\lib\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery.validate.min.js" />
     <Content Include="Scripts\lib\jquery.validate.unobtrusive.js" />
@@ -252,6 +259,13 @@
     <Content Include="Scripts\lib\modernizr-2.6.2.js" />
     <Content Include="Scripts\lib\respond.js" />
     <Content Include="Scripts\lib\respond.min.js" />
+    <Content Include="Scripts\lib\wColorPicker.min.js" />
+    <Content Include="Scripts\lib\wPaint-utils.js" />
+    <Content Include="Scripts\lib\wPaint.js" />
+    <Content Include="Scripts\lib\wPaint.menu.main.file.min.js" />
+    <Content Include="Scripts\lib\wPaint.menu.main.min.js" />
+    <Content Include="Scripts\lib\wPaint.menu.main.shapes.min.js" />
+    <Content Include="Scripts\lib\wPaint.menu.text.min.js" />
     <Content Include="Scripts\single-page-handler.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
