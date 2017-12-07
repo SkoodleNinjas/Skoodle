@@ -4,7 +4,7 @@
 $('#wPaint').wPaint({
     menuOffsetLeft: -35,
     menuOffsetTop: -50,
-    menuOrientation: 'vertical'
+    menuOrientation: 'horizontal'
 })
 
 /*
@@ -118,3 +118,4 @@ $("#negative").click(function () {
 
     negative(img, context, canvas);
 })
+$(".")

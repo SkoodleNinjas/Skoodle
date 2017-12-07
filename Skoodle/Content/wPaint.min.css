@@ -360,8 +360,8 @@
 }
 
 .wPaint-theme-classic .wPaint-menu-icon {
-    border-color: #b9b9b9;
-    background-color: #b9b9b9;
+    /*border-color: #b9b9b9;
+    background-color: #b9b9b9;*/
     -webkit-box-shadow: inset 2px 2px 3px #eee,1px 1px 2px #666;
     box-shadow: inset 2px 2px 3px #eee,1px 1px 2px #666
 }
@@ -400,4 +400,9 @@
 .wPaint-theme-classic .wPaint-modal-close, .wPaint-theme-classic .wPaint-modal-holder {
     border-color: #3a3a3a;
     background-color: #f0f0f0
+}
+.wPaint-menu-icon-name-bucket {
+    /*background-color: aquamarine;
+    */
+        background-image: url('Content/imgs/sexykofa.jpg');
 }
