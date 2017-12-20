@@ -279,7 +279,17 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\imgs\sexykofa.jpg" />
+    <Content Include="Content\imgs\bucketIcon.png" />
+    <Content Include="Content\imgs\eraserIcon.png" />
+    <Content Include="Content\imgs\elipseIcon.png" />
+    <Content Include="Content\imgs\lineIcon.png" />
+    <Content Include="Content\imgs\pencilIcon.png" />
+    <Content Include="Content\imgs\pensilIcon.png" />
+    <Content Include="Content\imgs\rectangleIcon.png" />
+    <Content Include="Content\imgs\redoIcon.png" />
+    <Content Include="Content\imgs\textIcon.png" />
+    <Content Include="Content\imgs\undoIcon.png" />
+    <Content Include="Content\imgs\XIcon.png" />
     <Content Include="Content\wColorPicker.min.css" />
     <Content Include="Content\wPaint.min.css" />
     <Content Include="favicon.ico" />

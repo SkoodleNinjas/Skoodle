@@ -3,7 +3,7 @@
 var roomName = $("#room-name").text();
 
 function checkAndStartGame() {
-    if ($('#connected-users li').length >= 3) {
+    if ($('#connected-users li').length >= 1) {
         startGame();
     }
 }

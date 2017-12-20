@@ -78,11 +78,13 @@ function negative(imageObj, context, canvas) {
 
 // this method will initilize the filter buttons and assign the events for each
 function initFilters() {
-    var buttons = '<button id="grayScale">Gray scale!</button>' +
-                  '<button id="blur">Blur!</button>' + 
-                  '<button id="negative">Negative!</button>'
+    var buttonGrayScale = '<button id="grayScale">Gray scale!</button>'
+    var buttonBlur = '<button id="blur">Blur!</button>'
+    var buttonNegative = '<button id="negative">Negative!</button>'
 
-    buttons.appendTo('#canvas-container')
+    $('#canvas-container').append(buttonGrayScale)
+    $('#canvas-container').append(buttonBlur)
+    $('#canvas-container').append(buttonNegative)
 
     // Assign to #grayScale button to call the gray scale function
     $("#grayScale").click(function () {
@@ -120,6 +122,19 @@ function initFilters() {
     })
 }
 
+function setUXIcons() {
+    $("div[title='Bucket']").css("background-image", "url(/Content/imgs/bucketIcon.png)");
+    $("div[title='Pencil']").css("background-image", "url(/Content/imgs/pencilIcon.png)");
+    $("div[title='Eraser']").css("background-image", "url(/Content/imgs/eraserIcon.png)");
+    $("div[title='Text']").css("background-image", "url(/Content/imgs/textIcon.png)");
+    $("div[title='Line']").css("background-image", "url(/Content/imgs/lineIcon.png)");
+    $("div[title='Ellipse']").css("background-image", "url(/Content/imgs/elipseIcon.png)");
+    $("div[title='Rectangle']").css("background-image", "url(/Content/imgs/rectangleIcon.png)");
+    $("div[title='Clear']").css("background-image", "url(/Content/imgs/XIcon.png)");
+    $("div[title='Redo']").css("background-image", "url(/Content/imgs/redoIcon.png)");
+    $("div[title='Undo']").css("background-image", "url(/Content/imgs/undoIcon.png)");
+
+}
 
 function startGame() {
     /*
@@ -132,4 +147,5 @@ function startGame() {
     })
 
     initFilters()
+    setUXIcons()
 }
