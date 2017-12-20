@@ -46,7 +46,8 @@ namespace Skoodle
 
             bundles.Add(new StyleBundle("~/Content/wPaintStyles").Include(
                 "~/Content/wColorPicker.min.css",
-                "~/Content/wPaint.min.css"));
+                "~/Content/wPaint.min.css",
+                "~/Content/chat.css"));
         }
     }
 }

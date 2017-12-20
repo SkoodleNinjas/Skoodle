@@ -122,6 +122,7 @@ function initFilters() {
     })
 }
 
+// After the library has initialized we change its default iamges
 function setUXIcons() {
     $("div[title='Bucket']").css("background-image", "url(/Content/imgs/bucketIcon.png)");
     $("div[title='Pencil']").css("background-image", "url(/Content/imgs/pencilIcon.png)");
@@ -136,6 +137,10 @@ function setUXIcons() {
 
 }
 
+
+/*
+ * Start Game initilizes the game canvas and users start to play
+ */ 
 function startGame() {
     /*
      * Initialize the wPaint library into the #wPaint div
