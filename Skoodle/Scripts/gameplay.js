@@ -1,13 +1,4 @@
 ﻿/*
- * Initialize the wPaint library into the #wPaint div
- */
-$('#wPaint').wPaint({
-    menuOffsetLeft: -35,
-    menuOffsetTop: -50,
-    menuOrientation: 'horizontal'
-})
-
-/*
  * grayScale -> Function which gray scales the image from canvas
  * context -> the canvas context
  * canvas -> the html canvas in which the image is contained
@@ -84,38 +75,61 @@ function negative(imageObj, context, canvas) {
     context.putImageData(imageData, 0, 0);
 }
 
-// Assign to #grayScale button to call the gray scale function
-$("#grayScale").click(function () {
-    // get the canvas
-    canvas = $(".wPaint-canvas")[0];
-    // get the context from the canvas
-    context = canvas.getContext('2d');
-    grayScale(context, canvas);
-})
+
+// this method will initilize the filter buttons and assign the events for each
+function initFilters() {
+    var buttons = '<button id="grayScale">Gray scale!</button>' +
+                  '<button id="blur">Blur!</button>' + 
+                  '<button id="negative">Negative!</button>'
+
+    buttons.appendTo('#canvas-container')
+
+    // Assign to #grayScale button to call the gray scale function
+    $("#grayScale").click(function () {
+        // get the canvas
+        canvas = $(".wPaint-canvas")[0];
+        // get the context from the canvas
+        context = canvas.getContext('2d');
+        grayScale(context, canvas);
+    })
 
 
-// Assign to #blur  button to call the blur function
-$("#blur").click(function () {
-    // get canvas
-    canvas = $(".wPaint-canvas")[0];
-    // get the canvas context
-    context = canvas.getContext('2d');
-    // create and assign the image to the canvas image
-    img = new Image();
-    img.src = canvas.toDataURL();
-    blur(img, context);
-})
+    // Assign to #blur  button to call the blur function
+    $("#blur").click(function () {
+        // get canvas
+        canvas = $(".wPaint-canvas")[0];
+        // get the canvas context
+        context = canvas.getContext('2d');
+        // create and assign the image to the canvas image
+        img = new Image();
+        img.src = canvas.toDataURL();
+        blur(img, context);
+    })
 
-// Assign to #negative button to call the negative function
-$("#negative").click(function () {
-    // get canvas
-    canvas = $(".wPaint-canvas")[0];
-    // get the canvas context
-    context = canvas.getContext('2d');
-    // create and assign the image to the canvas image
-    img = new Image();
-    img.src = canvas.toDataURL();
+    // Assign to #negative button to call the negative function
+    $("#negative").click(function () {
+        // get canvas
+        canvas = $(".wPaint-canvas")[0];
+        // get the canvas context
+        context = canvas.getContext('2d');
+        // create and assign the image to the canvas image
+        img = new Image();
+        img.src = canvas.toDataURL();
 
-    negative(img, context, canvas);
-})
-$(".")
+        negative(img, context, canvas);
+    })
+}
+
+
+function startGame() {
+    /*
+     * Initialize the wPaint library into the #wPaint div
+     */
+    $('#wPaint').wPaint({
+        menuOffsetLeft: -35,
+        menuOffsetTop: -50,
+        menuOrientation: 'horizontal'
+    })
+
+    initFilters()
+}

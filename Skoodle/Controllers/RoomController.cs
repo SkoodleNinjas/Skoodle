@@ -64,6 +64,7 @@ namespace Skoodle.Controllers
             Room room = db.Rooms.Find(roomId);
 
             room.Users.Remove(loggedUser);
+            db.SaveChanges();
             return Index();
         }
 
