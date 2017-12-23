@@ -138,19 +138,56 @@ function setUXIcons() {
 }
 
 
+function endGame() {
+    console.log('END GAME!!');
+}
+
 /*
  * Start Game initilizes the game canvas and users start to play
  */ 
 function startGame() {
-    /*
-     * Initialize the wPaint library into the #wPaint div
-     */
-    $('#wPaint').wPaint({
-        menuOffsetLeft: -35,
-        menuOffsetTop: -50,
-        menuOrientation: 'horizontal'
-    })
 
-    initFilters()
-    setUXIcons()
+    var secondsBeforeStart = 5; // Time is in seconds
+    var timeForGame = 60; // Time is in seconds
+
+    var secondsTillGame = secondsBeforeStart;
+
+    for (var i = 1; i <= secondsBeforeStart; i++) {
+        setTimeout(function () {
+            $('#timer').text(secondsTillGame + 's');
+            $('#timer').fadeIn();
+            $('#timer').fadeOut();
+            secondsTillGame--;
+        }, 1000 * i);
+    }
+
+    setTimeout(function () {
+        /*
+         * Initialize the wPaint library into the #wPaint div
+         */
+        $('#wPaint').wPaint({
+            menuOffsetLeft: -35,
+            menuOffsetTop: -50,
+            menuOrientation: 'horizontal'
+        })
+
+        initFilters()
+        setUXIcons()
+        var leftGameTime = timeForGame;
+        $('#progress-bar').show();
+
+        // 25 times the time so that we can have 25fps for smooth animation
+        for (var i = 1; i <= timeForGame * 25; i++) {
+            setTimeout(function () {
+                leftGameTime--;
+                $('#timer-progress').width(((timeForGame - leftGameTime) / timeForGame) * 4 + '%')
+            }, 40 * i);
+        }
+
+        setTimeout(function () {
+            endGame();            
+        }, timeForGame * 1000);
+
+    }, secondsBeforeStart * 1000);
+
 }
