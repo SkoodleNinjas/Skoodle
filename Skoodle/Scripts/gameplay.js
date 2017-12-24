@@ -142,6 +142,23 @@ function endGame() {
     console.log('END GAME!!');
 }
 
+var timerIds = new Array();
+
+function cleanTimeoutsForGame() {
+    for (var i = 0; i < timerIds.length; i++) {
+        clearTimeout(timerIds[i])
+    }
+}
+
+$('#leave-room').click(function () {
+    cleanTimeoutsForGame();
+})
+
+$(window).bind('statechange', function () {
+    cleanTimeoutsForGame();
+    $('#leave-room').trigger("click");
+});
+
 /*
  * Start Game initilizes the game canvas and users start to play
  */ 
@@ -153,15 +170,15 @@ function startGame() {
     var secondsTillGame = secondsBeforeStart;
 
     for (var i = 1; i <= secondsBeforeStart; i++) {
-        setTimeout(function () {
+        timerIds.push(setTimeout(function () {
             $('#timer').text(secondsTillGame + 's');
             $('#timer').fadeIn();
             $('#timer').fadeOut();
             secondsTillGame--;
-        }, 1000 * i);
+        }, 1000 * i));
     }
 
-    setTimeout(function () {
+    var playTimer = setTimeout(function () {
         /*
          * Initialize the wPaint library into the #wPaint div
          */
@@ -178,16 +195,18 @@ function startGame() {
 
         // 25 times the time so that we can have 25fps for smooth animation
         for (var i = 1; i <= timeForGame * 25; i++) {
-            setTimeout(function () {
+            timerIds.push(setTimeout(function () {
                 leftGameTime--;
                 $('#timer-progress').width(((timeForGame - leftGameTime) / timeForGame) * 4 + '%')
-            }, 40 * i);
+            }, 40 * i));
         }
 
-        setTimeout(function () {
+        timerIds.push(setTimeout(function () {
             endGame();            
-        }, timeForGame * 1000);
+        }, (timeForGame + 1) * 1000));
 
-    }, secondsBeforeStart * 1000);
+    }, (secondsBeforeStart + 1) * 1000);
+
+    timerIds.push(playTimer);
 
 }
