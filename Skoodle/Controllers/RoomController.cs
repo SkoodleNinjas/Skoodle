@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Skoodle.Models;
 using Skoodle.ViewModels;
 using Microsoft.AspNet.Identity;
+using System.IO;
 
 namespace Skoodle.Controllers
 {
@@ -163,6 +164,27 @@ namespace Skoodle.Controllers
             return RedirectToAction("Index");
         }
 
+        // Change the image name to be associated with Room, Topic and UserName
+        [HttpPost]
+        public void SendDrawing(string image)
+        {
+            var src = DateTime.Now;
+            // Make service for file saving :)
+            var timer = new DateTime(src.Year, src.Month, src.Day, src.Hour, src.Minute, src.Second);
+            string fileName = timer.ToString() + ".png";
+            string fileNameWithPath = Path.Combine(Server.MapPath("~/UserImages"), Path.GetFileNameWithoutExtension(fileName));
+            using (FileStream fs = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                using(BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    byte[] data = Convert.FromBase64String(image);
+                    bw.Write(data);
+                    bw.Close();
+                }
+                fs.Close();
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -171,5 +193,6 @@ namespace Skoodle.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

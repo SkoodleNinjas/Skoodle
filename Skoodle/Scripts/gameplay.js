@@ -139,7 +139,13 @@ function setUXIcons() {
 
 
 function endGame() {
-    console.log('END GAME!!');
+    var image = $('.wPaint-canvas')[0].toDataURL("image/png");
+    image = image.replace('data:image/png;base64,', '');
+    $.ajax({
+        type: "POST",
+        url: '/Room/SendDrawing',
+        data: { 'image': image }
+    })
 }
 
 var timerIds = new Array();
