@@ -5,6 +5,12 @@ namespace Skoodle.Models
 {
     public class Room
     {
+        public Room()
+        {
+            Users = new HashSet<ApplicationUser>();
+            Topic = new HashSet<Topic>();
+        }
+
         [Key]
         public int RoomId { get; set; }
         public string RoomName { get; set; }

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Skoodle.Models;
-using Skoodle.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.IO;
 using Skoodle.BusinessLogic;
@@ -32,12 +26,6 @@ namespace Skoodle.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = roomLogic.GetRoomById(id);
-            if (room == null)
-            {
-                return HttpNotFound();
-            }
-
             var loggedUserId = User.Identity.GetUserId();
             var roomViewModel = roomLogic.JoinUserToRoomById(loggedUserId, id);
 
@@ -131,35 +119,6 @@ namespace Skoodle.Controllers
             roomLogic.DeleteRoomById(id);
             return RedirectToAction("Index");
         }
-
-        // Change the image name to be associated with Room, Topic and UserName
-        [HttpPost]
-        public void SendDrawing(string image)
-        {
-            var src = DateTime.Now;
-            var timer = new DateTime(src.Year, src.Month, src.Day, src.Hour, src.Minute, src.Second);
-            string fileName = timer.ToString() + ".png";
-            string fileNameWithPath = Path.Combine(Server.MapPath("~/UserImages"), Path.GetFileNameWithoutExtension(fileName));
-            using (FileStream fs = new FileStream(fileNameWithPath, FileMode.Create))
-            {
-                using (BinaryWriter bw = new BinaryWriter(fs))
-                {
-                    byte[] data = Convert.FromBase64String(image);
-                    bw.Write(data);
-                    bw.Close();
-                }
-                fs.Close();
-            }
-        }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
 
     }
 }

@@ -9,7 +9,7 @@ var roomName = $("#room-name").text();
  */
 function fillMsgTemplate(user, msg, time) {
     element = '<div class="chat-container">' +
-        '<h1>' + user.toUpperCase()[0] + '</h1>' +
+        '<h1>' + user[0] + '</h1>' +
         '<p class="username">' + user + '</p>' +
         '<p>' + msg + '</p>' +
         '<span class="time-right">' + time + '</span>' +
@@ -29,7 +29,7 @@ function fillUserTemplate(username) {
 checkAndStartGame -> Checks the start condition of the game and if it is true than the game starts
 */
 function checkAndStartGame() {
-    if ($('#connected-users li').length >= 1) {
+    if ($('#connected-users li').length >= 2) {
         startGame();
     }
 }
@@ -38,6 +38,7 @@ function checkAndStartGame() {
 assigns to the the message sending socket so that the messages are recieved
 */
 hub.client.addChatMessage = function (user, msg, time) {
+    console.log(user)
     $('#messages').append(fillMsgTemplate(user, msg, time));
 }
 

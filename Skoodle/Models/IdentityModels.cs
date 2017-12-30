@@ -34,5 +34,9 @@ namespace Skoodle.Models
 
         public System.Data.Entity.DbSet<Skoodle.Models.Room> Rooms { get; set; }
         public System.Data.Entity.DbSet<Skoodle.Models.Topic> Topics { get; set; }
+        public System.Data.Entity.DbSet<Skoodle.Models.Round> Rounds { get; set; }
+        public System.Data.Entity.DbSet<Skoodle.Models.Game> Games { get; set; }
+        public System.Data.Entity.DbSet<Skoodle.Models.UserDrawing> UserDrawings { get; set; }
+
     }
 }

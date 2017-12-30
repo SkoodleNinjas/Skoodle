@@ -246,9 +246,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\GameLogic.cs" />
     <Compile Include="BusinessLogic\RoomLogic.cs" />
     <Compile Include="BusinessLogic\UserLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
@@ -267,12 +269,17 @@
     <Compile Include="Migrations\201711222011143_RoomsUsersRelationAdded.Designer.cs">
       <DependentUpon>201711222011143_RoomsUsersRelationAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.cs" />
+    <Compile Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.Designer.cs">
+      <DependentUpon>201712301737367_CreateRoundsGamesUserDrawings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Round.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\UserDrawing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -375,6 +382,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UserImages\" />
+    <Folder Include="Views\Game\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -398,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711222011143_RoomsUsersRelationAdded.resx">
       <DependentUpon>201711222011143_RoomsUsersRelationAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.resx">
+      <DependentUpon>201712301737367_CreateRoundsGamesUserDrawings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -138,15 +138,7 @@ function setUXIcons() {
 }
 
 
-function endGame() {
-    var image = $('.wPaint-canvas')[0].toDataURL("image/png");
-    image = image.replace('data:image/png;base64,', '');
-    $.ajax({
-        type: "POST",
-        url: '/Room/SendDrawing',
-        data: { 'image': image }
-    })
-}
+
 
 var timerIds = new Array();
 
@@ -165,11 +157,44 @@ $(window).bind('statechange', function () {
     $('#leave-room').trigger("click");
 });
 
-/*
- * Start Game initilizes the game canvas and users start to play
- */ 
-function startGame() {
 
+function endRound(roundNum) {
+    var gameId = parseInt($('#game-id').val())
+    var image = $('.wPaint-canvas')[0].toDataURL("image/png");
+    image = image.replace('data:image/png;base64,', '');
+    $.ajax({
+        type: "POST",
+        url: '/Game/FinishRound',
+        data: { 'gameId': gameId, 'roundNum': roundNum, 'image': image }
+    });
+    setTimeout(function () {
+        $.ajax({
+            type: "POST",
+            url: '/Game/EndRoundScreen',
+            data: { 'gameId': gameId, 'roundNum': roundNum, 'image': image },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }, 500);
+}
+
+
+function startGame() {
+    var roomId = parseInt($('#room-id').val())
+    $.ajax({
+        type: "POST",
+        url: "/Game/CreateGame",
+        data: { "roomId": roomId },
+        success: function (data) {
+            $('#game-id').val(data['gameId'])
+        }
+    })
+    startRound(1);
+}
+
+
+function startRound(roundNum) {
     var secondsBeforeStart = 5; // Time is in seconds
     var timeForGame = 60; // Time is in seconds
 
@@ -208,11 +233,10 @@ function startGame() {
         }
 
         timerIds.push(setTimeout(function () {
-            endGame();            
+            endRound(roundNum);
         }, (timeForGame + 1) * 1000));
 
     }, (secondsBeforeStart + 1) * 1000);
 
     timerIds.push(playTimer);
-
 }
