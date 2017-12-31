@@ -1,4 +1,17 @@
-﻿/*
+﻿var roomId = parseInt($('#room-id').val())
+console.log($('#game-id').val())
+if (!$('#game-id').val()) {
+    $.ajax({
+        type: "POST",
+        url: "/Game/CreateGame",
+        data: { "roomId": roomId },
+        success: function (data) {
+            $('#game-id').val(data['gameId'])
+        }
+    })
+}
+
+/*
  * grayScale -> Function which gray scales the image from canvas
  * context -> the canvas context
  * canvas -> the html canvas in which the image is contained
@@ -181,15 +194,6 @@ function endRound(roundNum) {
 
 
 function startGame() {
-    var roomId = parseInt($('#room-id').val())
-    $.ajax({
-        type: "POST",
-        url: "/Game/CreateGame",
-        data: { "roomId": roomId },
-        success: function (data) {
-            $('#game-id').val(data['gameId'])
-        }
-    })
     startRound(1);
 }
 

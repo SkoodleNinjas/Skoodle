@@ -30,6 +30,13 @@ namespace Skoodle.BusinessLogic
             room.Users.Add(loggedUser);
             db.SaveChanges();
 
+            string gameId = "";
+
+            if(db.Games.Any(gm => gm.Room.RoomId == roomId && gm.IsGameAlive == true))
+            {
+                gameId = db.Games.First(gm => gm.Room.RoomId == roomId && gm.IsGameAlive == true).GameId.ToString();
+            }
+
             var userNamesInRoom = new List<string>();
 
             foreach (var user in room.Users)
@@ -41,7 +48,8 @@ namespace Skoodle.BusinessLogic
             {
                 RoomId = room.RoomId,
                 Name = room.RoomName,
-                CurrentUserNames = userNamesInRoom
+                CurrentUserNames = userNamesInRoom,
+                GameId = gameId
             };
         }
 

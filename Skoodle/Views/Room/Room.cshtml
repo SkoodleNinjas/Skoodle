@@ -34,7 +34,7 @@
         @Html.ActionLink("Leave room", "LeaveRoom", "Room", new { roomId = Model.RoomId }, new { @class = "btn btn-info", id = "leave-room" })
     </div>
     <input id="room-id" type="hidden" value="@Model.RoomId">
-    <input id="game-id" type="hidden" value="">
+    <input id="game-id" type="hidden" value="@Model.GameId">
 </div>
 <script src="~/Scripts/lib/jquery.signalR-2.2.2.js"></script>
 <script src="~/signalr/hubs"></script>

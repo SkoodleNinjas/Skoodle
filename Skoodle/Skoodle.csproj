@@ -273,6 +273,10 @@
     <Compile Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.Designer.cs">
       <DependentUpon>201712301737367_CreateRoundsGamesUserDrawings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712311531073_GameStatus.cs" />
+    <Compile Include="Migrations\201712311531073_GameStatus.Designer.cs">
+      <DependentUpon>201712311531073_GameStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Game.cs" />
@@ -409,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.resx">
       <DependentUpon>201712301737367_CreateRoundsGamesUserDrawings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712311531073_GameStatus.resx">
+      <DependentUpon>201712311531073_GameStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

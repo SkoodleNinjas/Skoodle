@@ -74,15 +74,19 @@ namespace Skoodle.BusinessLogic
         public Game CreateGame(int roomId)
         {
             Room room = db.Rooms.Find(roomId);
-            Game game = new Game
+            if (!db.Games.Any(gm => gm.IsGameAlive == true && gm.Room.RoomId == roomId))
             {
-                PlayedTime = DateTime.Now,
-                Room = room
-            };
-
-            db.Games.Add(game);
-            db.SaveChanges();
-
+                Game newGame = new Game
+                {
+                    PlayedTime = DateTime.Now,
+                    Room = room,
+                    IsGameAlive = true
+                };
+                db.Games.Add(newGame);
+                db.SaveChanges();
+                return newGame;
+            }
+            Game game = db.Games.First((gm => gm.IsGameAlive == true && gm.Room.RoomId == roomId));
             return game;
         }
 
