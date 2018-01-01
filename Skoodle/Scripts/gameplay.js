@@ -1,12 +1,14 @@
 ﻿var roomId = parseInt($('#room-id').val())
 console.log($('#game-id').val())
+
 if (!$('#game-id').val()) {
     $.ajax({
         type: "POST",
         url: "/Game/CreateGame",
         data: { "roomId": roomId },
         success: function (data) {
-            $('#game-id').val(data['gameId'])
+            $('#game-id').val(data['gameId']);
+            $("#round-num").val(data['roundNum']);
         }
     })
 }
@@ -158,6 +160,31 @@ function imageVotingTemplate(imageSrc, userId) {
 
 var timerIds = new Array();
 
+function resetBoard() {
+    $('#canvas-container').empty();
+    var drawingHtml = '<div>' +
+        '<h1 id="timer"></h1>' +
+        '<div class="progress" id="progress-bar" style="display:none">' +
+        '<div id="timer-progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div id="wPaint" style="position:relative; width:100%; height:300px; background-color:#ffffff;">' +
+        '</div>';
+    $('#canvas-container').html(drawingHtml);
+}
+
+function updateUserScores(data) {
+    users = $('#connected-users > li > .badge');
+    for (i = 0; i < users.length; i++) {
+        jqUser = $(users[i]);
+        if (jqUser.parent().html().indexOf(data[i]['Item2']) !== -1) {
+            score = parseInt(jqUser.html());
+            jqUser.html(score + 1);
+        }
+    }
+}
+
 function putImages(data) {
     $('#canvas-container').empty();
     console.log(data);
@@ -168,6 +195,45 @@ function putImages(data) {
         templ = imageVotingTemplate(imageSrc, userId);
         $('#canvas-container').append(templ)
     }
+
+    timerId = setTimeout(function () {
+        inputs = $('#canvas-container input[type="radio"]')
+        for (i = 0; i < inputs.length; i++) {
+            if (inputs[i].checked) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Game/VoteForImage",
+                    data: { "drawingId": inputs[i].value },
+                    async: false
+                });
+                break;
+            }
+        }
+    }, 30 * 1000); // aka as 0.5 min
+
+    timerIds.push(timerId);
+    var gameId = parseInt($('#game-id').val());
+    var roundNum = parseInt($('#round-num').val());
+    timerId = setTimeout(function () {
+        inputs = $('#canvas-container input[type="radio"]')
+        for (i = 0; i < inputs.length; i++) {
+            if (inputs[i].checked) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Game/GetUserScores/?gameId=" + gameId + "&roundNum=" + roundNum,
+                    success: function (data) {
+                        updateUserScores(data);
+                        $('#round-num').val(roundNum + 1);
+                        resetBoard();
+                        startRound(roundNum + 1);
+                    }
+                });
+                break;
+            }
+        }
+    }, 30.5 * 1000); // aka as 1/2 second after the voting
+    timerIds.push(timerId);
+
 }
 
 function cleanTimeoutsForGame() {
@@ -209,7 +275,8 @@ function endRound(roundNum) {
 
 
 function startGame() {
-    startRound(1);
+    var round = parseInt($('#round-num').val())
+    startRound(round);
 }
 
 
@@ -234,7 +301,7 @@ function startRound(roundNum) {
          */
         $('#wPaint').wPaint({
             menuOffsetLeft: -35,
-            menuOffsetTop: -50,
+            menuOffsetTop: -25,
             menuOrientation: 'horizontal'
         })
 

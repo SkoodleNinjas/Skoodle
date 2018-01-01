@@ -31,10 +31,13 @@ namespace Skoodle.BusinessLogic
             db.SaveChanges();
 
             string gameId = "";
+            string roundNum = "";
 
             if(db.Games.Any(gm => gm.Room.RoomId == roomId && gm.IsGameAlive == true))
             {
-                gameId = db.Games.First(gm => gm.Room.RoomId == roomId && gm.IsGameAlive == true).GameId.ToString();
+                var game = db.Games.First(gm => gm.Room.RoomId == roomId && gm.IsGameAlive == true);
+                gameId = game.GameId.ToString();
+                roundNum = (game.Rounds.Count() + 1).ToString();
             }
 
             var userNamesInRoom = new List<string>();
@@ -49,7 +52,8 @@ namespace Skoodle.BusinessLogic
                 RoomId = room.RoomId,
                 Name = room.RoomName,
                 CurrentUserNames = userNamesInRoom,
-                GameId = gameId
+                GameId = gameId,
+                RoundNum = roundNum
             };
         }
 

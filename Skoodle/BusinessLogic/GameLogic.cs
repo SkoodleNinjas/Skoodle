@@ -20,6 +20,7 @@ namespace Skoodle.BusinessLogic
             var user = db.Users.First(us => us.Id == userId);
             var userDrawing = new UserDrawing
             {
+                Votes = 0,
                 FileName = drawingFileName,
                 User = user
             };
@@ -52,9 +53,9 @@ namespace Skoodle.BusinessLogic
             db.SaveChanges();
         }
 
-        public List<Tuple<string, string>> GetDrawingsForRound(int gameId, int roundNum, string loggedUserId)
+        public List<Tuple<string, int>> GetDrawingsForRound(int gameId, int roundNum, string loggedUserId)
         {
-            var result = new List<Tuple<string, string>>();
+            var result = new List<Tuple<string, int>>();
             var round = db.Rounds.First(rnd => rnd.Game.GameId == gameId && rnd.RoundNum == roundNum);
 
             foreach (UserDrawing ud in round.Drawings)
@@ -66,10 +67,10 @@ namespace Skoodle.BusinessLogic
                 var filename = ud.FileName;
                 byte[] imageBytes = System.IO.File.ReadAllBytes(filename);
 
-                var drawingAndUser = new Tuple<string, string>(
-                    Convert.ToBase64String(imageBytes), ud.User.Id);
+                var drawingAndId = new Tuple<string, int>(
+                    Convert.ToBase64String(imageBytes), ud.UserDrawingId);
 
-                result.Add(drawingAndUser);
+                result.Add(drawingAndId);
             }
 
             return result;
@@ -94,5 +95,25 @@ namespace Skoodle.BusinessLogic
             return game;
         }
 
+        public void AddVoteForImage(int drawingId)
+        {
+            var userDrawing = db.UserDrawings.First(dw => dw.UserDrawingId == drawingId);
+            userDrawing.Votes += 1;
+            db.SaveChanges();
+        }
+
+        public List<Tuple<int, string>> GetRoundScores(int gameId, int roundNum)
+        {
+            var result = new List<Tuple<int, string>>();
+            var round = db.Rounds.First(rnd => rnd.Game.GameId == gameId && rnd.RoundNum == roundNum);
+
+            foreach (UserDrawing ud in round.Drawings)
+            {
+                var scoreAndUser = new Tuple<int, string>(ud.Votes, ud.User.UserName);
+
+                result.Add(scoreAndUser);
+            }
+            return result;
+        }
     }
 }

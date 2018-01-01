@@ -22,7 +22,10 @@ function fillMsgTemplate(user, msg, time) {
 fillUserTemplate -> takes username and fills it in the template for the users lists
 */
 function fillUserTemplate(username) {
-    return '<li><span class="glyphicon glyphicon- user"></span>  ' + username + '</li>';
+    return '<li><span class="glyphicon glyphicon-user"></span>' +
+           username +
+           '<span class="badge">0</span>' +
+           '</li>';
 }
 
 /*
@@ -38,7 +41,6 @@ function checkAndStartGame() {
 assigns to the the message sending socket so that the messages are recieved
 */
 hub.client.addChatMessage = function (user, msg, time) {
-    console.log(user)
     $('#messages').append(fillMsgTemplate(user, msg, time));
 }
 
@@ -61,7 +63,7 @@ Assings to the event for adding users and if there is new user joined he
 is displayed to the user
 */
 hub.client.addUser = function (user) {
-    $('#connected-users').append(fillMsgTemplate)
+    $('#connected-users').append(fillUserTemplate(user))
     checkAndStartGame();
 }
 

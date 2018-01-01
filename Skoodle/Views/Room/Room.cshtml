@@ -7,11 +7,11 @@
         <div>
             <div id="messages"></div>
             <br />
-            <input type="text" id="message-inp" class="form-control"/>
+            <input type="text" id="message-inp" class="form-control" />
             <button id="send" class="btn btn-success">Send</button>
         </div>
     </div>
-    
+
     <div id="canvas-container" class="col-sm-4">
         <div>
             <h1 id="timer"></h1>
@@ -23,18 +23,20 @@
         <div id="wPaint" style="position:relative; width:100%; height:300px; background-color:#ffffff;">
         </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-4">
         <h2>Users</h2>
         <ul id="connected-users" class="nondot-list">
             @foreach (var username in Model.CurrentUserNames)
             {
-                <li><span class="glyphicon glyphicon-user"></span>  @username</li>
+                <li><span class="glyphicon glyphicon-user"></span>@username<span class="badge">0</span></li>
             }
         </ul>
         @Html.ActionLink("Leave room", "LeaveRoom", "Room", new { roomId = Model.RoomId }, new { @class = "btn btn-info", id = "leave-room" })
     </div>
+
     <input id="room-id" type="hidden" value="@Model.RoomId">
     <input id="game-id" type="hidden" value="@Model.GameId">
+    <input id="round-num" type="hidden" value="@Model.RoundNum">
 </div>
 <script src="~/Scripts/lib/jquery.signalR-2.2.2.js"></script>
 <script src="~/signalr/hubs"></script>

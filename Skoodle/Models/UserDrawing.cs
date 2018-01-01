@@ -8,6 +8,8 @@ namespace Skoodle.Models
         [Key]
         public int UserDrawingId { get; set; }
 
+        public int Votes { get; set; }
+
         public string FileName { get; set; }
 
         public virtual ApplicationUser User { get; set; }

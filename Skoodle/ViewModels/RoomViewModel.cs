@@ -12,6 +12,9 @@ namespace Skoodle.ViewModels
         public string CurrentTopic { get; set; }
 
         public List<String> CurrentUserNames { get; set; }
+
         public string GameId { get; set; }
+
+        public string RoundNum { get; set; }
     }
 }

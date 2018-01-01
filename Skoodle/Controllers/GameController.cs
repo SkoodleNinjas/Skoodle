@@ -20,15 +20,15 @@ namespace Skoodle.Controllers
             var game = gameLogic.CreateGame(roomId);
             var id = game.GameId;
 
-            return Json(new { gameId = id });
+            return Json(new { gameId = id , roundNum = game.Rounds.Count() + 1});
         }
 
         [HttpPost]
-        public void FinishRound(int gameId, int roundNum,string image)
+        public void FinishRound(int gameId, int roundNum, string image)
         {
             var loggedUserId = User.Identity.GetUserId();
             var user = userLogic.GetUserById(loggedUserId);
-            string fileName = gameId.ToString() + roundNum.ToString() + user.UserName+ ".png";
+            string fileName = gameId.ToString() + roundNum.ToString() + user.UserName + ".png";
             string fileNameWithPath = Path.Combine(Server.MapPath("~/UserImages"), Path.GetFileNameWithoutExtension(fileName));
             using (FileStream fs = new FileStream(fileNameWithPath, FileMode.Create))
             {
@@ -49,6 +49,19 @@ namespace Skoodle.Controllers
             var loggedUserId = User.Identity.GetUserId();
             var drawingsAndUserIds = gameLogic.GetDrawingsForRound(gameId, roundNum, loggedUserId);
             return Json(drawingsAndUserIds);
+        }
+
+        [HttpPost]
+        public void VoteForImage(int drawingId)
+        {
+            gameLogic.AddVoteForImage(drawingId);
+        }
+
+        [HttpGet]
+        public JsonResult GetUserScores(int gameId, int roundNum)
+        {
+            var scores = gameLogic.GetRoundScores(gameId, roundNum);
+            return Json(scores, JsonRequestBehavior.AllowGet);
         }
     }
 }
