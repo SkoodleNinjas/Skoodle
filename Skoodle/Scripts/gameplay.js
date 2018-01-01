@@ -151,9 +151,24 @@ function setUXIcons() {
 }
 
 
-
+function imageVotingTemplate(imageSrc, userId) {
+   return "<label>" + '<input type="radio" name="fb" value="' + userId + '" />'+
+        '<img src="data:image/png;base64,'+ imageSrc + '">' + "</label>"
+}
 
 var timerIds = new Array();
+
+function putImages(data) {
+    $('#canvas-container').empty();
+    console.log(data);
+    console.log(data.length);
+    for (i = 0; i < data.length; i++) {
+        var imageSrc = data[i]['Item1'];
+        var userId = data[i]['Item2'];
+        templ = imageVotingTemplate(imageSrc, userId);
+        $('#canvas-container').append(templ)
+    }
+}
 
 function cleanTimeoutsForGame() {
     for (var i = 0; i < timerIds.length; i++) {
@@ -186,7 +201,7 @@ function endRound(roundNum) {
             url: '/Game/EndRoundScreen',
             data: { 'gameId': gameId, 'roundNum': roundNum, 'image': image },
             success: function (data) {
-                console.log(data);
+                putImages(data)
             }
         });
     }, 500);

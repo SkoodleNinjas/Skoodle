@@ -46,7 +46,8 @@ namespace Skoodle.Controllers
 
         public ActionResult EndRoundScreen(int gameId, int roundNum)
         {
-            var drawingsAndUserIds = gameLogic.GetDrawingsForRound(gameId, roundNum);
+            var loggedUserId = User.Identity.GetUserId();
+            var drawingsAndUserIds = gameLogic.GetDrawingsForRound(gameId, roundNum, loggedUserId);
             return Json(drawingsAndUserIds);
         }
     }

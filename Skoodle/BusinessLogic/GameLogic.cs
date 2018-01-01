@@ -52,13 +52,17 @@ namespace Skoodle.BusinessLogic
             db.SaveChanges();
         }
 
-        public List<Tuple<string, string>> GetDrawingsForRound(int gameId, int roundNum)
+        public List<Tuple<string, string>> GetDrawingsForRound(int gameId, int roundNum, string loggedUserId)
         {
             var result = new List<Tuple<string, string>>();
             var round = db.Rounds.First(rnd => rnd.Game.GameId == gameId && rnd.RoundNum == roundNum);
 
             foreach (UserDrawing ud in round.Drawings)
             {
+                if (ud.User.Id == loggedUserId)
+                {
+                    continue;
+                }
                 var filename = ud.FileName;
                 byte[] imageBytes = System.IO.File.ReadAllBytes(filename);
 
