@@ -32,7 +32,7 @@ function fillUserTemplate(username) {
 checkAndStartGame -> Checks the start condition of the game and if it is true than the game starts
 */
 function checkAndStartGame() {
-    if ($('#connected-users li').length >= 2) {
+    if ($('#connected-users li').length >= 3) {
         startGame();
     }
 }

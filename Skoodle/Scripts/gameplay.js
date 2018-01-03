@@ -180,7 +180,8 @@ function updateUserScores(data) {
         jqUser = $(users[i]);
         if (jqUser.parent().html().indexOf(data[i]['Item2']) !== -1) {
             score = parseInt(jqUser.html());
-            jqUser.html(score + 1);
+            console.log('score = ' + score)
+            jqUser.html(score + data[i]['Item1']);
         }
     }
 }
