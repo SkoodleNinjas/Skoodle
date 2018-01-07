@@ -137,6 +137,7 @@ function initFilters() {
     })
 }
 
+
 // After the library has initialized we change its default iamges
 function setUXIcons() {
     $("div[title='Bucket']").css("background-image", "url(/Content/imgs/bucketIcon.png)");
@@ -176,65 +177,83 @@ function resetBoard() {
 
 function updateUserScores(data) {
     users = $('#connected-users > li > .badge');
+    console.log(users);
     for (i = 0; i < users.length; i++) {
         jqUser = $(users[i]);
-        if (jqUser.parent().html().indexOf(data[i]['Item2']) !== -1) {
-            score = parseInt(jqUser.html());
-            console.log('score = ' + score)
-            jqUser.html(score + data[i]['Item1']);
+        for (k = 0; k < data.length; k++) {
+            if (jqUser.parent().html().indexOf(data[k]['Item2']) !== -1) {
+                score = parseInt(jqUser.html());
+                console.log('score = ' + score)
+                jqUser.html(score + data[k]['Item1']);
+            }
         }
     }
 }
 
-function putImages(data) {
-    $('#canvas-container').empty();
-    console.log(data);
-    console.log(data.length);
-    for (i = 0; i < data.length; i++) {
-        var imageSrc = data[i]['Item1'];
-        var userId = data[i]['Item2'];
-        templ = imageVotingTemplate(imageSrc, userId);
-        $('#canvas-container').append(templ)
-    }
-
-    timerId = setTimeout(function () {
-        inputs = $('#canvas-container input[type="radio"]')
-        for (i = 0; i < inputs.length; i++) {
-            if (inputs[i].checked) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Game/VoteForImage",
-                    data: { "drawingId": inputs[i].value },
-                    async: false
-                });
-                break;
-            }
-        }
-    }, 30 * 1000); // aka as 0.5 min
-
-    timerIds.push(timerId);
+function updateScores() {
     var gameId = parseInt($('#game-id').val());
     var roundNum = parseInt($('#round-num').val());
-    timerId = setTimeout(function () {
-        inputs = $('#canvas-container input[type="radio"]')
-        for (i = 0; i < inputs.length; i++) {
-            if (inputs[i].checked) {
-                $.ajax({
-                    type: "GET",
-                    url: "/Game/GetUserScores/?gameId=" + gameId + "&roundNum=" + roundNum,
-                    success: function (data) {
-                        updateUserScores(data);
-                        $('#round-num').val(roundNum + 1);
-                        resetBoard();
-                        startRound(roundNum + 1);
-                    }
-                });
-                break;
+    for (i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked) {
+            $.ajax({
+                type: "GET",
+                url: "/Game/GetUserScores/?gameId=" + gameId + "&roundNum=" + roundNum,
+                success: function (data) {
+                    console.log(data);
+                    updateUserScores(data);
+                    $('#round-num').val(roundNum + 1);
+                }
+            });
+            break;
+        }
+    }
+}
+
+
+function gameFinished() {
+    var gameId = parseInt($('#game-id').val());
+    $.ajax({
+        type: "POST",
+        url: "/Game/FinishGame",
+        data: { 'gameId': gameId },
+        success: function (data) {
+            $('#canvas-container').empty();
+            $('#canvas-container').append("<h1>" + data['user'] + " wins with " + data['score'] +" points </h1>");
+        }
+    });
+}
+
+function endVotes() {
+    inputs = $('#canvas-container input[type="radio"]')
+    for (i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked) {
+            $.ajax({
+                type: "POST",
+                url: "/Game/VoteForImage",
+                data: { "drawingId": inputs[i].value },
+                async: false
+            });
+            break;
+        }
+    }
+}
+
+function startVotes(gameId, roundNum) {
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: '/Game/EndRoundScreen',
+        data: { 'gameId': gameId, 'roundNum': roundNum},
+        success: function (data) {
+            $('#canvas-container').empty();
+            for (i = 0; i < data.length; i++) {
+                var imageSrc = data[i]['Item1'];
+                var userId = data[i]['Item2'];
+                templ = imageVotingTemplate(imageSrc, userId);
+                $('#canvas-container').append(templ)
             }
         }
-    }, 30.5 * 1000); // aka as 1/2 second after the voting
-    timerIds.push(timerId);
-
+    });
 }
 
 function cleanTimeoutsForGame() {
@@ -262,16 +281,6 @@ function endRound(roundNum) {
         url: '/Game/FinishRound',
         data: { 'gameId': gameId, 'roundNum': roundNum, 'image': image }
     });
-    setTimeout(function () {
-        $.ajax({
-            type: "POST",
-            url: '/Game/EndRoundScreen',
-            data: { 'gameId': gameId, 'roundNum': roundNum, 'image': image },
-            success: function (data) {
-                putImages(data)
-            }
-        });
-    }, 500);
 }
 
 
@@ -286,6 +295,8 @@ function startRound(roundNum) {
     var timeForGame = 60; // Time is in seconds
 
     var secondsTillGame = secondsBeforeStart;
+    resetBoard();
+
 
     for (var i = 1; i <= secondsBeforeStart; i++) {
         timerIds.push(setTimeout(function () {
@@ -318,12 +329,7 @@ function startRound(roundNum) {
                 $('#timer-progress').width(((timeForGame - leftGameTime) / timeForGame) * 4 + '%')
             }, 40 * i));
         }
-
-        timerIds.push(setTimeout(function () {
-            endRound(roundNum);
-        }, (timeForGame + 1) * 1000));
-
-    }, (secondsBeforeStart + 1) * 1000);
+    }, (secondsBeforeStart) * 1000);
 
     timerIds.push(playTimer);
 }

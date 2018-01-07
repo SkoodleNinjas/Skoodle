@@ -257,6 +257,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\GameHub.cs" />
     <Compile Include="Migrations\201710132022289_InitialCreate.cs" />
     <Compile Include="Migrations\201710132022289_InitialCreate.Designer.cs">
       <DependentUpon>201710132022289_InitialCreate.cs</DependentUpon>
@@ -316,6 +317,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\hubHandlers.js" />
     <Content Include="Scripts\lib\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\lib\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\lib\bootstrap.js" />

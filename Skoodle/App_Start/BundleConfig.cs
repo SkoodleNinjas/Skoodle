@@ -41,13 +41,16 @@ namespace Skoodle
                 "~/Scripts/lib/wPaint.menu.main.min.js",
                 "~/Scripts/lib/wPaint.menu.text.min.js",
                 "~/Sctipts/lib/wPaint.menu.main.shapes.min.js",
-                "~/Scripts/lib/wPaint.menu.main.file.min.js",
-                "~/Scripts/gameplay.js"));
+                "~/Scripts/lib/wPaint.menu.main.file.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/wPaintStyles").Include(
                 "~/Content/wColorPicker.min.css",
                 "~/Content/wPaint.min.css",
                 "~/Content/chat.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/gameplay").Include(
+                "~/Scripts/gameplay.js",
+                "~/Scripts/hubHandlers.js"));
         }
     }
 }

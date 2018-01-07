@@ -119,6 +119,5 @@ namespace Skoodle.Controllers
             roomLogic.DeleteRoomById(id);
             return RedirectToAction("Index");
         }
-
     }
 }

@@ -63,5 +63,14 @@ namespace Skoodle.Controllers
             var scores = gameLogic.GetRoundScores(gameId, roundNum);
             return Json(scores, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult FinishGame(int gameId)
+        {
+
+            var userAndScore = gameLogic.FinishGame(gameId);
+
+            return Json(new { user = userAndScore.Key.UserName, score = userAndScore.Value });
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace Skoodle.BusinessLogic
 {
     public class GameLogic
     {
+        private RoomLogic roomLogic = new RoomLogic();
+
         private ApplicationDbContext db;
 
         public GameLogic()
@@ -44,12 +46,12 @@ namespace Skoodle.BusinessLogic
                     RoundNum = roundNum
                 };
                 db.Rounds.Add(newRound);
+                game.Rounds.Add(newRound);
                 db.SaveChanges();
             }
 
             var round = db.Rounds.First(rnd => rnd.Game.GameId == gameId && rnd.RoundNum == roundNum);
             round.Drawings.Add(userDrawing);
-
             db.SaveChanges();
         }
 
@@ -114,6 +116,75 @@ namespace Skoodle.BusinessLogic
                 result.Add(scoreAndUser);
             }
             return result;
+        }
+
+        public bool IsAbleToStartRound(int roomId)
+        {
+            var room = db.Rooms.First(rm => rm.RoomId == roomId);
+            return room.Users.Count() >= 2;
+        }
+
+        public bool IsGameActive(int gameId)
+        {
+            var game = db.Games.First(gm => gm.GameId == gameId);
+            return game.IsGameAlive;
+        }
+
+        public void SetGameInactive(int gameId)
+        {
+            var game = db.Games.First(gm => gm.GameId == gameId);
+            game.IsGameAlive = false;
+            db.SaveChanges();
+        }
+
+        public void SetGameActive(int gameId)
+        {
+            var game = db.Games.First(gm => gm.GameId == gameId);
+            game.IsGameAlive = true;
+            db.SaveChanges();
+        }
+
+        public bool IsGameFinished(int gameId)
+        {
+            // var game = db.Games.FirstOrDefault(x => x.GameId == gameId);
+            var rounds = db.Rounds.Where(x => x.Game.GameId == gameId).ToList();
+            return rounds.Count >= roomLogic.GetRoundsForGame(gameId);
+        }
+
+        public KeyValuePair<ApplicationUser, int> FinishGame(int gameId)
+        {
+            var game = db.Games.First(gm => gm.GameId == gameId);
+
+            Dictionary<ApplicationUser, int> results = new Dictionary<ApplicationUser, int>();
+
+            foreach(Round rnd in game.Rounds) {
+                foreach(UserDrawing ud in rnd.Drawings)
+                {
+                    if(!results.ContainsKey(ud.User))
+                    {
+                        results.Add(ud.User, 0);
+                    }
+                    results[ud.User] += ud.Votes;
+                }
+            }
+
+            ApplicationUser winner = null;
+            int maxPoints = 0;
+
+            foreach(KeyValuePair<ApplicationUser, int> kv in results)
+            {
+                if(kv.Value > maxPoints)
+                {
+                    maxPoints = kv.Value;
+                    winner = kv.Key;
+                }
+            }
+
+            game.WinnerUser = winner;
+
+            db.SaveChanges();
+
+            return new KeyValuePair<ApplicationUser, int>(winner, maxPoints);
         }
     }
 }

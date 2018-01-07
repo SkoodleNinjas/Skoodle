@@ -89,5 +89,12 @@ namespace Skoodle.BusinessLogic
             db.Rooms.Remove(room);
             db.SaveChanges();
         }
+
+        public int GetRoundsForGame(int gameId)
+        {
+            var game = db.Games.First(gm => gm.GameId == gameId);
+            Room room = game.Room;
+            return room.MaxRounds;
+        }
     }
 }
