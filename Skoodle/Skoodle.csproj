@@ -282,8 +282,13 @@
     <Compile Include="Migrations\201801011756013_DrawingVotes.Designer.cs">
       <DependentUpon>201801011756013_DrawingVotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801091255313_Cathegories.cs" />
+    <Compile Include="Migrations\201801091255313_Cathegories.Designer.cs">
+      <DependentUpon>201801091255313_Cathegories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Cathegory.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -425,6 +430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801011756013_DrawingVotes.resx">
       <DependentUpon>201801011756013_DrawingVotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091255313_Cathegories.resx">
+      <DependentUpon>201801091255313_Cathegories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

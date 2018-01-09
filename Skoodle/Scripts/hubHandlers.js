@@ -3,17 +3,20 @@ var hub = $.connection.roomHub
 
 gameHub.client.roundStart = function () {
     console.log('round start')
+    cleanTimeoutsForGame();
     startGame();
 }
 
 gameHub.client.roundEnd = function () {
     console.log('round end')
+    cleanTimeoutsForGame();
     var round = parseInt($('#round-num').val())
     endRound(round)
 }
 
 gameHub.client.votingStart = function () {
     console.log('vote start')
+    cleanTimeoutsForGame();
     var roundNum = parseInt($('#round-num').val());
     var gameId = parseInt($('#game-id').val());
     startVotes(gameId, roundNum);
@@ -21,16 +24,19 @@ gameHub.client.votingStart = function () {
 
 gameHub.client.votingEnd = function () {
     console.log('voting end')
+    cleanTimeoutsForGame();
     endVotes()
 }
 
 gameHub.client.updateStatuses = function () {
     console.log('update statuses')
+    cleanTimeoutsForGame();
     updateScores()
 }
 
 gameHub.client.gameFinished = function () {
     console.log('gameFinished');
+    cleanTimeoutsForGame();
     gameFinished();
 }
 

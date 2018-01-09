@@ -286,11 +286,13 @@ function endRound(roundNum) {
 
 function startGame() {
     var round = parseInt($('#round-num').val())
+    console.log("Start game")
     startRound(round);
 }
 
 
 function startRound(roundNum) {
+    console.log("Start round")
     var secondsBeforeStart = 5; // Time is in seconds
     var timeForGame = 60; // Time is in seconds
 
