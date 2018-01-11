@@ -57,6 +57,12 @@ namespace Skoodle.BusinessLogic
             };
         }
 
+        public Cathegory GetRoomCathegory(int roomId)
+        {
+            var room = GetRoomById(roomId);
+            return room.Cathegory;
+        }
+
         public void LeaveRoomById(string userId, int roomId)
         {
             var user = db.Users.FirstOrDefault(x => x.Id == userId);
@@ -69,6 +75,22 @@ namespace Skoodle.BusinessLogic
         public Room GetRoomById(int? id)
         {
             return db.Rooms.Find(id);
+        }
+
+        public void CreateRoom(NewRoomViewModel room)
+        {
+            var cathegory = db.Cathegories.FirstOrDefault(ct => ct.CathegoryName == room.CathegoryName);
+            var newRoom = new Room
+            {
+                RoomName = room.RoomName,
+                MaxPlayers = room.MaxPlayers,
+                MaxRounds = room.MaxRounds,
+                Cathegory = cathegory,
+                Users = new HashSet<ApplicationUser>()
+            };
+
+            db.Rooms.Add(newRoom);
+            db.SaveChanges();
         }
 
         public void CreateRoom(Room room)

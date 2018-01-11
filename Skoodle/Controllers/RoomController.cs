@@ -2,6 +2,7 @@
 using System.Net;
 using System.Web.Mvc;
 using Skoodle.Models;
+using Skoodle.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.IO;
 using Skoodle.BusinessLogic;
@@ -11,8 +12,9 @@ namespace Skoodle.Controllers
     public class RoomController : Controller
     {
 
-        UserLogic userLogic = new UserLogic();
-        RoomLogic roomLogic = new RoomLogic();
+        private UserLogic userLogic = new UserLogic();
+        private RoomLogic roomLogic = new RoomLogic();
+        private CathegoryLogic cathegoryLogic = new CathegoryLogic();
 
         // GET: Room
         public ActionResult Index()
@@ -55,6 +57,9 @@ namespace Skoodle.Controllers
         // GET: Room/Create
         public ActionResult Create()
         {
+            var cathegories = cathegoryLogic.GetCathegoryNames();
+
+            ViewBag.Cathegories = cathegories;
             return PartialView();
         }
 
@@ -63,15 +68,16 @@ namespace Skoodle.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RoomId,RoomName,MaxPlayers,MaxRounds")] Room room)
+        public ActionResult Create(NewRoomViewModel room)
         {
+
             if (ModelState.IsValid)
             {
                 roomLogic.CreateRoom(room);
                 return Index();
             }
 
-            return PartialView(room);
+           return PartialView(room);
         }
 
         // GET: Room/Edit/5

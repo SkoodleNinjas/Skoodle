@@ -8,7 +8,6 @@ namespace Skoodle.Models
         public Room()
         {
             Users = new HashSet<ApplicationUser>();
-            Topic = new HashSet<Topic>();
         }
 
         [Key]
@@ -16,7 +15,7 @@ namespace Skoodle.Models
         public string RoomName { get; set; }
         public int MaxPlayers { get; set; }
         public int MaxRounds { get; set; }
-        public virtual ICollection<Topic> Topic { get; set; }
+        public virtual Cathegory Cathegory { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

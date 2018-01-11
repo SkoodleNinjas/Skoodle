@@ -1,4 +1,4 @@
-﻿@model Skoodle.Models.Room
+﻿@model Skoodle.ViewModels.NewRoomViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -37,6 +37,12 @@
                 @Html.EditorFor(model => model.MaxRounds, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MaxRounds, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Choose Cathegory</label>
+            @Html.DropDownList("CathegoryName", new SelectList(ViewBag.Cathegories, "Value", "Text"))
+
         </div>
 
         <div class="form-group">

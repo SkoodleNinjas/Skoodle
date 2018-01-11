@@ -7,13 +7,13 @@ namespace Skoodle.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class GameStatus : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(GameStatus));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712311531073_GameStatus"; }
+            get { return "201801111012422_Initial"; }
         }
         
         string IMigrationMetadata.Source

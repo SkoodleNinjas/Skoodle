@@ -31,6 +31,7 @@ namespace Skoodle.Migrations
                 new Cathegory { CathegoryName = "characters" }
                 );
 
+            context.SaveChanges();
             Dictionary<string, Cathegory> nameCathegories = new Dictionary<string, Cathegory>();
 
             List<Cathegory> allCathegories = context.Cathegories.ToList();
@@ -104,7 +105,7 @@ namespace Skoodle.Migrations
               new Topic { Name = "Waldo", Category = nameCathegories["characters"] },
               new Topic { Name = "ThomasTheTankEngine", Category = nameCathegories["characters"] }
             );
-
+            context.SaveChanges();
         }
     }
 }

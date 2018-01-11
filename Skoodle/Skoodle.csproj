@@ -246,6 +246,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\CathegoryLogic.cs" />
     <Compile Include="BusinessLogic\GameLogic.cs" />
     <Compile Include="BusinessLogic\RoomLogic.cs" />
     <Compile Include="BusinessLogic\UserLogic.cs" />
@@ -258,33 +259,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\GameHub.cs" />
-    <Compile Include="Migrations\201710132022289_InitialCreate.cs" />
-    <Compile Include="Migrations\201710132022289_InitialCreate.Designer.cs">
-      <DependentUpon>201710132022289_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711211822272_Room.cs" />
-    <Compile Include="Migrations\201711211822272_Room.Designer.cs">
-      <DependentUpon>201711211822272_Room.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711222011143_RoomsUsersRelationAdded.cs" />
-    <Compile Include="Migrations\201711222011143_RoomsUsersRelationAdded.Designer.cs">
-      <DependentUpon>201711222011143_RoomsUsersRelationAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.cs" />
-    <Compile Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.Designer.cs">
-      <DependentUpon>201712301737367_CreateRoundsGamesUserDrawings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712311531073_GameStatus.cs" />
-    <Compile Include="Migrations\201712311531073_GameStatus.Designer.cs">
-      <DependentUpon>201712311531073_GameStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801011756013_DrawingVotes.cs" />
-    <Compile Include="Migrations\201801011756013_DrawingVotes.Designer.cs">
-      <DependentUpon>201801011756013_DrawingVotes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091255313_Cathegories.cs" />
-    <Compile Include="Migrations\201801091255313_Cathegories.Designer.cs">
-      <DependentUpon>201801091255313_Cathegories.cs</DependentUpon>
+    <Compile Include="Migrations\201801111012422_Initial.cs" />
+    <Compile Include="Migrations\201801111012422_Initial.Designer.cs">
+      <DependentUpon>201801111012422_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -298,6 +275,8 @@
     <Compile Include="Models\UserDrawing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CreateRoomViewModel.cs" />
+    <Compile Include="ViewModels\NewRoomViewModel.cs" />
     <Compile Include="ViewModels\RoomViewModel.cs" />
     <Compile Include="Hubs\RoomHub.cs" />
   </ItemGroup>
@@ -413,26 +392,8 @@
     <Content Include="Scripts\lib\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710132022289_InitialCreate.resx">
-      <DependentUpon>201710132022289_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711211822272_Room.resx">
-      <DependentUpon>201711211822272_Room.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711222011143_RoomsUsersRelationAdded.resx">
-      <DependentUpon>201711222011143_RoomsUsersRelationAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712301737367_CreateRoundsGamesUserDrawings.resx">
-      <DependentUpon>201712301737367_CreateRoundsGamesUserDrawings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712311531073_GameStatus.resx">
-      <DependentUpon>201712311531073_GameStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801011756013_DrawingVotes.resx">
-      <DependentUpon>201801011756013_DrawingVotes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091255313_Cathegories.resx">
-      <DependentUpon>201801091255313_Cathegories.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801111012422_Initial.resx">
+      <DependentUpon>201801111012422_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
